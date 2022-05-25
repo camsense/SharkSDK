@@ -8,7 +8,7 @@
 #include <list>
 #include <iostream>
 
-#define SDK_VER                    (char*)"3.0.9"
+#define SDK_VER                    (char*)"3.0.10"
 
 #define SHARK_ENABLE               1
 
@@ -131,10 +131,10 @@ typedef struct tsSDKPara
 
     tsSDKPara()
     {
-        iNoDataMS=1000;
+        iNoDataMS=2000;
         iDisconnectMS=3000;
         iFPSContinueMS=5000;
-        iSpeedContinueMS=3500;
+        iSpeedContinueMS=6000;
         iCoverContinueMS=3500;
         iBlockContinueMS=3500;
         iCoverPoints = 100;

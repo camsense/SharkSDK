@@ -8,7 +8,7 @@
 #include <list>
 #include <iostream>
 
-#define SDK_VER                    (char*)"3.0.10"
+#define SDK_VER                    (char*)"3.0.11"
 
 #define SHARK_ENABLE               1
 
@@ -76,8 +76,8 @@ typedef unsigned long long int     UINT64;
 
 #define  FPS_2000_NOR                   2085
 #define  FPS_3000_NOR                   3000
-#define  FPS_2000_RANGE                 35
-#define  FPS_3000_RANGE                 50
+#define  FPS_2000_RANGE                 100
+#define  FPS_3000_RANGE                 100
 #define  FPS_2000_MAX                   (FPS_2000_NOR+FPS_2000_RANGE)
 #define  FPS_2000_MIN                   (FPS_2000_NOR-FPS_2000_RANGE)
 #define  FPS_3000_MAX                   (FPS_3000_NOR+FPS_3000_RANGE)

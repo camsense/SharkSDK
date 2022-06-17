@@ -246,6 +246,7 @@ BOOL HCLidar::initialize(const char* chPort, const char* chLidarModel,int iBaud,
         setReadCharsError(ERR_SERIAL_INVALID_HANDLE);
         return false;
     }
+	resetParam();
 
     m_iSDKStatus = SDK_INIT;
     m_bScanning = true;
@@ -1902,4 +1903,18 @@ void HCLidar::callbackDistQ2()
 
     if(dataList.size()>0)
         m_funDistQ2(dataList);
+}
+
+void HCLidar::resetParam()
+{
+	LOG_INFO("resetParam\n");
+	m_iInvalidFPSSecond = 0;
+	m_u64StartTimeLowSpeed = 0;
+	m_u64StartTimeHighSpeed = 0;
+	m_u64StartTimeSharkBlock = 0;
+	m_iSharkBlockCount = 0;
+	m_u64StartTimeInvalidPoints = 0;
+	m_iValidNumber = 0;
+
+	m_iLastErrorCode = 0;
 }

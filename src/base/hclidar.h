@@ -269,6 +269,7 @@ private:
     void pushDataWithLoopMode(bool& isTurn, std::list<tsNodeInfo>& loopNodeList, tsNodeInfo& node_cur);
     void checkInvalidLidarNumber(int validNumber);
     void callbackDistQ2();
+	void resetParam();
 
 };
 

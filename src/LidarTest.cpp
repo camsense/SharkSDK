@@ -129,9 +129,9 @@ void LidarTest::initLidar()
 	int iBaud = 115200;
 	int iReadTimeoutms = 10;//
 
-	int iPort = getPort();
+	int iPort = 7;// getPort();
 	std::string strPort;
-	std::string strLidarModel = getLidarModel();
+	std::string strLidarModel = "X1M";// getLidarModel();
 
 	// ##### 1. Open serial port using valid COM id #####
 #ifdef _WIN32
@@ -158,6 +158,7 @@ void LidarTest::initLidar()
 	//std::this_thread::sleep_for(std::chrono::milliseconds(3000));
 	//在这里给雷达上电
 
+	
 	if (!device.getLidarInfo())
 	{
 		device.unInit();
@@ -192,11 +193,11 @@ void LidarTest::initLidar()
 		        LstPointCloud lstG;
 				if (device.getRxPointClouds(lstG))
 				{
-					printf("LidarTest: Poll Rx Points=%d\n", lstG.size());
-					for (auto sInfo : lstG)
+					//printf("LidarTest: Poll Rx Points=%d\n", lstG.size());
+					/*for (auto sInfo : lstG)
 					{
 						printf("LidarTest: Angle=%0.4f,Dist=%d, u16Gray =%d\n", sInfo.dAngle, sInfo.u16Dist, sInfo.u16Gray);
-					}
+					}*/
 				}
 				else
 				{
@@ -229,7 +230,7 @@ void LidarTest::initLidar()
 		int iSDKStatus = device.getSDKStatus();
 
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(10));
+		std::this_thread::sleep_for(std::chrono::milliseconds(1));
 		std::this_thread::yield();
 		//printf("\n");
 	}

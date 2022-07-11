@@ -350,8 +350,57 @@ void HCLidar::readData()
     int iRC = m_serial.readData(m_p8Buff, READ_BUFF_SIZE, m_iReadTimeOutms);
     if (iRC < 1)
     {
+		std::this_thread::sleep_for(std::chrono::milliseconds(1));
+		std::this_thread::yield();
 
-        if(iRC == 0)
+		if (iRC == 0)
+		{
+
+			if (m_u64StartTimeNoData > 0)
+			{
+				UINT64 endTime = HCHead::getCurrentTimestampUs();
+				if ((endTime - m_u64StartTimeNoData) >= m_sSDKPara.iNoDataMS * 1000)
+				{
+					LOG_WARNING("Lidar read timeout!\n");
+
+					setReadCharsError(iRC);
+					m_u64StartTimeNoData = 0;
+
+					m_iReadTimeoutCount++;
+
+					int iTemp2 = m_sSDKPara.iDisconnectMS / m_sSDKPara.iNoDataMS;
+					if (m_iReadTimeoutCount >= iTemp2)
+					{
+						LOG_ERROR("Lidar disconnect! status=%d\n", static_cast<int>(m_iSDKStatus));
+						if (m_iSDKStatus == SDK_INIT)
+						{
+							checkHadInitSuccess(true);
+							return;
+						}
+						m_iReadTimeoutCount = 0;
+						m_bDisconnect = true;
+						lidarReConnect();
+						m_iSDKStatus = SDK_DISCONNECT;
+
+
+
+						setReadCharsError(ERR_DISCONNECTED);
+					}
+				}
+			}
+			else
+			{
+				m_u64StartTimeNoData = HCHead::getCurrentTimestampUs();
+			}
+
+
+		}
+		else
+		{
+			setReadCharsError(iRC);
+		}
+
+        /*if(iRC == 0)
         {
             m_iReadTimeoutCount++;
             int iTemp = m_sSDKPara.iNoDataMS / m_iReadTimeOutms;
@@ -382,12 +431,13 @@ void HCLidar::readData()
         else
         {
             setReadCharsError(iRC);
-        }
+        }*/
 
         return;
     }
     m_iReadTimeoutCount=0;
     m_bDisconnect = false;
+	m_u64StartTimeNoData = 0;
 
     std::lock_guard<std::mutex> lock(m_mtxBuff);
     for(int i=0;i<iRC;i++)

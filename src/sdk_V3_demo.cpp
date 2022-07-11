@@ -164,7 +164,7 @@ int main()
 		}
 			
 
-#if 1
+#if 0
 		if (iCount > 30)
 		{
 			//lidarTest->~LidarTest();

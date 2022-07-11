@@ -193,7 +193,7 @@ void LidarTest::initLidar()
 		        LstPointCloud lstG;
 				if (device.getRxPointClouds(lstG))
 				{
-					//printf("LidarTest: Poll Rx Points=%d\n", lstG.size());
+					printf("LidarTest: Poll Rx Points=%d\n", lstG.size());
 					/*for (auto sInfo : lstG)
 					{
 						printf("LidarTest: Angle=%0.4f,Dist=%d, u16Gray =%d\n", sInfo.dAngle, sInfo.u16Dist, sInfo.u16Gray);
@@ -204,7 +204,7 @@ void LidarTest::initLidar()
 					int iError = device.getLastErrCode();
 					if (iError != LIDAR_SUCCESS)
 					{
-						printf("LidarTest: Poll Rx Points error code=%d" , iError );
+						printf("LidarTest: Poll Rx Points error code=%d\n" , iError );
 						switch (iError)
 						{
 						case ERR_SHARK_MOTOR_BLOCKED:

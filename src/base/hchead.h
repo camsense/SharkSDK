@@ -8,7 +8,7 @@
 #include <list>
 #include <iostream>
 
-#define SDK_VER                    (char*)"3.0.11"
+#define SDK_VER                    (char*)"3.0.12"
 
 #define SHARK_ENABLE               1
 
@@ -397,14 +397,35 @@ public:
 bool nodeComparator(const tsNodeInfo& s1, const tsNodeInfo& s2);
 bool newComparator(const tsPointCloud& s1, const tsPointCloud& s2);
 
+static char*  print_curr_time()
+{
+	time_t now = time(nullptr);
+	tm* curr_tm = localtime(&now);
+
+	//tm curr_tm;
+	//localtime_s(&curr_tm,&now);
+	static char time[80] = { 0 };
+	strftime(time, 80, "%Y-%m-%d %H:%M:%S    ", curr_tm);
+	//printf(time);
+	return time;
+}
+
 #ifdef __linux__
 #define __FILENAME__ (strrchr(__FILE__, '/') ? (strrchr(__FILE__, '/') + 1):__FILE__)
 #endif
 #if defined (_WIN32) || defined( _WIN64)
 #define __FILENAME__ (strrchr(__FILE__, '\\') ? (strrchr(__FILE__, '\\') + 1):__FILE__)
 #endif
-#define LOG_WARNING (printf("HCSDK Warning:%s:%s %s:%u:\t", __DATE__, __TIME__, __FILENAME__, __LINE__), printf) 
-#define LOG_INFO    (printf("HCSDK Info:%s:%s %s:%u:\t", __DATE__, __TIME__, __FILENAME__, __LINE__), printf) 
-#define LOG_ERROR   (printf("HCSDK Error:%s:%s %s:%u:\t", __DATE__, __TIME__, __FILENAME__, __LINE__), printf) 
+
+#define __MY_DATE__ (print_curr_time())
+
+
+
+
+#define LOG_WARNING (printf("HCSDK W:%s %s:%u:\t", __MY_DATE__, __FILENAME__, __LINE__), printf) 
+#define LOG_INFO    (printf("HCSDK I:%s %s:%u:\t", __MY_DATE__, __FILENAME__, __LINE__), printf) 
+#define LOG_ERROR   (printf("HCSDK E:%s %s:%u:\t", __MY_DATE__, __FILENAME__, __LINE__), printf) 
+
+
 
 #endif // HCHEAD_H

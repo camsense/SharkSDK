@@ -203,6 +203,7 @@ private:
     int                      m_iSpeedMax = 420;
     int                      m_iSpeedMin = 300;
     int                      m_iCircleNumberMAX=415;
+	UINT64                   m_u64StartTimeNoData = 0;
 
     int                      m_iInvalidFPSSecond=0;
     UINT64                   m_u64StartTimeLowSpeed=0;

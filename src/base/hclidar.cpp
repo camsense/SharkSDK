@@ -1965,6 +1965,7 @@ void HCLidar::resetParam()
 	m_iSharkBlockCount = 0;
 	m_u64StartTimeInvalidPoints = 0;
 	m_iValidNumber = 0;
+	m_iReadTimeoutCount=0;
 
 	m_iLastErrorCode = 0;
 }

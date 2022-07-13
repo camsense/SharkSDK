@@ -200,6 +200,9 @@ bool HCLidar::setLidarPara(const char* chLidarModel)
 BOOL HCLidar::initialize(const char* chPort, const char* chLidarModel,int iBaud, int iReadTimeoutMs,  bool bDistQ2,bool bGetLoopData, bool bPollMode)
 {
 	LOG_INFO("Init sdk\n");
+
+	LOG_INFO(SDK_VER);
+	LOG_INFO("\n");
     if(m_bScanning)
     {
 
